@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://joloshree.netlify.app/sitemap.xml

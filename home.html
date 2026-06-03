@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joloshree - The Rivière Habitat | Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Joloshree - The Rivière Habitat: A unique floating restaurant on the Ganges. Enjoy authentic Bengali seafood on a ferry boat in Chandannagar. Book your riverside table today.">
+</head>
+<body>
+<script>
+    // Only redirect if we are NOT already at the loader
+    if (!sessionStorage.getItem('redirecting')) {
+        sessionStorage.setItem('redirecting', 'true');
+        localStorage.setItem('targetPage', 'home.html');
+        window.location.href = 'index.html';
+    } else {
+        sessionStorage.removeItem('redirecting');
+    }
+</script>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="logo">
+            <i class="fas fa-ship"></i> Joloshree | The Rivière Habitat
+        </div>
+        <div class="nav-links">
+            <a href="home.html"><i class="fas fa-home"></i> Home</a>
+            <a href="booking.html"><i class="fas fa-calendar-check"></i> Book a Seat</a>
+        </div>
+    </nav>
+
+    <!-- Video Section - Normal player -->
+<div class="video-section">
+    <video autoplay muted loop playsinline id="video" style="width: 100%; max-height: 500px; object-fit: cover;" aria-label="Joloshree floating restaurant on the river at sunset">
+        <source src="videos/jolshree.mp4" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-boat-sailing-on-the-river-at-sunset-39716-large.mp4" type="video/mp4">
+    </video>
+</div>
+
+<!-- Content Section - Below the video -->
+<div class="content-section" style="text-align: center; padding: 3rem 1rem; background: linear-gradient(135deg, #0a2c28, #031e1b);">
+<h1 style="font-family: 'Georgia', serif; font-size: 2.5rem; color: #bcf5ec;">Joloshree - The Rivière Habitat</h1>
+<p style="font-size: 1.2rem; margin: 1rem 0; color: #eef4f0;">
+    <i class="fas fa-fish"></i> A floating gastronomic journey on sacred waters <i class="fas fa-water"></i>
+</p>
+
+<!-- ADD THESE H2 TAGS -->
+<h2 style="font-size: 1.5rem; color: #9fd3c7; margin-top: 2rem;">Our Signature Dishes</h2>
+<h2 style="font-size: 1.0rem; color: #9fd3c7;">How to Reach Us</h2>
+    <a href="booking.html" class="seat-booking-btn" style="display: inline-block; margin-top: 1rem; background: #1e6b65; padding: 14px 30px; border-radius: 50px; color: white; text-decoration: none; font-weight: bold;">
+        <i class="fas fa-anchor"></i> Reserve Your Cabin Table <i class="fas fa-chevron-right"></i>
+    </a>
+</div>
+
+    <!-- Context + Address Block -->
+    <div class="info-address">
+        <div class="context">
+            <i class="fas fa-water"></i> 
+            <strong>Joloshree – The Rivière Habitat</strong> is not just a restaurant; it's a poetic drift on the river. 
+            Our ferry restaurant blends Bengali culinary heritage with lapping waves and starlit skies. 
+            Fresh catch, regional spices, and a gentle tide — every meal becomes a voyage.
+        </div>
+        <div class="address">
+            <i class="fas fa-map-pin"></i> Ferry Dock, Ganges Riverside<br>
+            <i class="fas fa-ship"></i> Berth #12, Chandannagar Riverfront<br>
+            <i class="fas fa-phone-alt"></i> +91 xxxxx-xxxxx
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-fish"></i> Where the river meets your plate | Open daily 12 PM – 11 PM
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

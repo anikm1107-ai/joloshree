@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joloshree - The Rivière Habitat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Joloshree - The Rivière Habitat. Authentic riverside dining experience. Fresh seafood, floating kitchen, and unforgettable views. Book your table today.">
+    <style>
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #021a17;
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 1s ease;
+        }
+
+        .loading-video-container {
+            width: 90%;
+            max-width: 800px;
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 0 3px rgba(64,224,208,0.3);
+        }
+
+        .loading-video-container video {
+            width: 100%;
+            display: block;
+        }
+
+        .loading-text {
+            margin-top: 32px;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            font-weight: 300;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #9fd3c7, #3fa7a0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-video-container">
+            <video autoplay muted playsinline id="loadingVideo">
+                <source src="videos/hmail.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="loading-text">⟡ setting sail ⟡</div>
+    </div>
+
+    <script>
+        // Get the target page (default to home.html)
+      // Get the target page
+let target = localStorage.getItem('targetPage');
+
+// If NO target page is set, that means we are NOT coming from home/booking
+// So just show loader and go to home.html (first time visit)
+if (!target) {
+    target = 'home.html';
+} else {
+    // We have a target, so clear it and proceed
+    localStorage.removeItem('targetPage');
+}
+        
+        // Animated loading text
+        const loadingText = document.querySelector('.loading-text');
+        const messages = ["🌊 casting off...", "🐟 tide welcomes you", "⛵ setting sail to Joloshree", "🌿 river whispers", "🍽️ floating kitchen ready"];
+        let idx = 0;
+        
+        const textInterval = setInterval(() => {
+            if (loadingText) {
+                loadingText.innerHTML = `⟡ ${messages[idx % messages.length]} ⟡`;
+                idx++;
+            }
+        }, 800);
+        
+        // Play video
+        const video = document.getElementById('loadingVideo');
+        if (video) {
+            video.muted = true;
+            video.play().catch(e => console.log("Video error:", e));
+        }
+        
+        // Redirect after 4 seconds
+        setTimeout(() => {
+            clearInterval(textInterval);
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                loadingScreen.style.opacity = '0';
+            }
+            setTimeout(() => {
+                window.location.href = target;
+            }, 500);
+        }, 2000);
+    </script>
+</body>
+</html>>

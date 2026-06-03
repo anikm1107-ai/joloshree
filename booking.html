@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joloshree - Secure Your Berth</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Book your table at Joloshree - the unique floating restaurant on the Ganges in Chandannagar. Reserve your riverside dining experience online today.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0a1f1e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* FULL WIDTH IMAGE SLIDER - OUTSIDE THE FORM */
+        .slider-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border-radius: 24px;
+            padding: 15px;
+        }
+
+        .slider-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .slider-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 3px solid #5fddd0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .slider-btn {
+            background: rgba(30,107,101,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: #118c82;
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: #5fddd0;
+            width: 25px;
+            border-radius: 10px;
+        }
+
+        .image-counter {
+            text-align: center;
+            margin-top: 10px;
+            color: #8bc9bf;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* BOOKING FORM CARD - Separate from slider */
+        .booking-card {
+            position: relative;
+            width: 100%;
+            max-width: 850px;
+            background: rgba(12, 47, 43, 0.95);
+            border-radius: 48px;
+            overflow: hidden;
+            border: 1px solid #37b2a3;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+        }
+
+        /* Video background INSIDE the card only */
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 26, 23, 0.7);
+            z-index: 1;
+        }
+
+        /* Content on top of video */
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            font-size: 1.8rem;
+            text-align: center;
+            color: #bcf5ec;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8bc9bf;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            color: #ccebe5;
+        }
+
+        label i {
+            margin-right: 6px;
+            color: #5fddd0;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 50px;
+            border: none;
+            background: #eef7f4;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        input:focus {
+            box-shadow: 0 0 0 2px #3bc9bc;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 5px;
+        }
+
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: normal;
+        }
+
+        .submit-booking {
+            width: 100%;
+            background: #2c9f92;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 60px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .submit-booking:hover {
+            background: #1e887b;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #8bc9bf;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .back-link:hover {
+            color: #bcf5ec;
+        }
+
+        .notification-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1d6d63;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 60px;
+            display: none;
+            z-index: 9999;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 700px) {
+            body { padding: 1rem; }
+            .slider-image { height: 250px; }
+            .slider-btn { width: 40px; height: 40px; font-size: 1.2rem; }
+            .card-content { padding: 1.5rem; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<script>
+    // Only redirect if we are NOT already at the loader
+    if (!sessionStorage.getItem('redirecting')) {
+        sessionStorage.setItem('redirecting', 'true');
+        localStorage.setItem('targetPage', 'booking.html');
+        window.location.href = 'index.html';
+    } else {
+        sessionStorage.removeItem('redirecting');
+    }
+</script>
+
+<!-- FULL WIDTH IMAGE SLIDER - OUTSIDE THE FORM -->
+<div class="slider-wrapper">
+    <div class="slider-container">
+        <div class="slider-main">
+            <button class="slider-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <img id="sliderImage" class="slider-image" src="images/s1.jpeg"alt="Joloshree floating restaurant interior with river view">
+            <button class="slider-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
+        <div class="image-counter" id="imageCounter"></div>
+    </div>
+</div>
+
+<!-- BOOKING FORM CARD -->
+<div class="booking-card">
+    <!-- Video background inside card -->
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/jolshree.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    
+    <div class="card-content">
+        <h1><i class="fas fa-ship"></i> Secure Your Berth</h1>
+        <h2 style="color: #bcf5ec; text-align: center; font-size: 1.2rem; margin-bottom: 1rem;">🌊 Reserve Your Floating Table in 3 Easy Steps</h2>
+        <p class="subtitle"><i class="fas fa-water"></i> Aboard Joloshree - The Rivière Habitat</p>
+        
+        <form id="bookingForm">
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="fullName" placeholder="e.g., Arnav Sen" required>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-phone-alt"></i> Phone Number</label>
+                <input type="tel" id="phone" placeholder="+91 98765 43210" required>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Gmail / Email</label>
+                <input type="email" id="email" placeholder="guest@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-calendar-day"></i> When to Book (Date)</label>
+                <input type="date" id="bookingDate" required>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-users"></i> Number of Persons</label>
+                <input type="number" id="persons" min="1" max="20" value="2" required>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-utensils"></i> Dining Preference</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="diningLocation" value="Inside Restaurant" checked> <i class="fas fa-ship"></i> Inside Cabin</label>
+                    <label><input type="radio" name="diningLocation" value="Outside Deck"> <i class="fas fa-water"></i> Outside Deck</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-booking"><i class="fas fa-ticket-alt"></i> Confirm Reservation</button>
+        </form>
+        
+        <a href="home.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Restaurant</a>
+    </div>
+</div>
+
+<div id="toastMsg" class="notification-toast"></div>
+
+<script>
+    // Image Slider - All 11 images
+const images = [
+    { src: "images/s1.jpeg", alt: "Floating restaurant exterior at sunset on Ganges" },
+    { src: "images/s2.jpg", alt: "Traditional Bengali fish curry served at Joloshree" },
+    { src: "images/s3.jpeg", alt: "Riverside dining deck with candlelit tables" },
+    { src: "images/s4.jpg", alt: "Chef preparing fresh catch on ferry restaurant" },
+    { src: "images/s5.jpg", alt: "Group dining experience on Ganges riverboat" },
+    { src: "images/s6.jpeg", alt: "Signature hilsa dish at Joloshree restaurant" },
+    { src: "images/s7.jpg", alt: "Moonlit view from floating restaurant Chandannagar" },
+    { src: "images/s8.jpeg", alt: "Traditional Bengali thali on wooden boat table" },
+    { src: "images/s9.jpeg", alt: "Romantic dinner on Joloshree deck" },
+    { src: "images/s10.jpeg", alt: "Sunset over Ganges from Joloshree" },
+    { src: "images/s11.jpeg", alt: "Welcome drink on floating restaurant" }
+];
+    
+    let currentIndex = 0;
+    const totalImages = images.length;
+    
+    const sliderImage = document.getElementById('sliderImage');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const sliderDots = document.getElementById('sliderDots');
+    const imageCounter = document.getElementById('imageCounter');
+    
+  function updateSlider() {
+    sliderImage.src = images[currentIndex].src;
+    sliderImage.alt = images[currentIndex].alt;
+    if (imageCounter) {
+        imageCounter.textContent = `${currentIndex + 1} / ${totalImages}`;
+    }
+    if (sliderDots) {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, i) => {
+            if (i === currentIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+}
+    
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % totalImages;
+        updateSlider();
+    }
+    
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        updateSlider();
+    }
+    
+    // Create dots
+    for (let i = 0; i < totalImages; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === currentIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            currentIndex = i;
+            updateSlider();
+        });
+        sliderDots.appendChild(dot);
+    }
+    
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
+    
+    // Keyboard arrows support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+    });
+    
+    updateSlider();
+    
+    // Booking Form Logic
+    const bookingForm = document.getElementById('bookingForm');
+    const toast = document.getElementById('toastMsg');
+    
+    const dateInput = document.getElementById('bookingDate');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+    
+    function showMessage(msg, isError = false) {
+        toast.style.backgroundColor = isError ? '#a1423a' : '#1d6d63';
+        toast.textContent = msg;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3000);
+    }
+    
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('fullName').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const date = document.getElementById('bookingDate').value;
+        const persons = document.getElementById('persons').value;
+        const dining = document.querySelector('input[name="diningLocation"]:checked')?.value;
+        
+        if (!name.trim()) return showMessage("Please enter your name", true);
+        if (!phone.trim()) return showMessage("Phone number is required", true);
+        if (!email.trim() || !email.includes('@')) return showMessage("Enter valid email", true);
+        if (!date) return showMessage("Select booking date", true);
+        
+        const booking = {
+            name, phone, email, date, persons, dining,
+            timestamp: new Date().toISOString()
+        };
+        let bookings = JSON.parse(localStorage.getItem('joloshree_bookings') || '[]');
+        bookings.push(booking);
+        localStorage.setItem('joloshree_bookings', JSON.stringify(bookings));
+        
+        showMessage(`✨ Bon Voyage ${name.split(' ')[0]}! Table reserved for ${date} ✨`);
+        
+        bookingForm.reset();
+        document.getElementById('persons').value = "2";
+        
+        setTimeout(() => {
+            window.location.href = "home.html";
+        }, 2000);
+    });
+</script>
+<script>
+    // Set flag that we came from booking
+    sessionStorage.setItem('redirectAfterLoad', 'booking.html');
+</script>
+</body>
+</html>
